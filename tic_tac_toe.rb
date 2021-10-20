@@ -8,10 +8,11 @@ class TicTacToe
   end
 
   def show_board
+    chars = ['X', 'O', ' ']
     @board.each do |row|
       row.each do |value|
-        to_display = value.nil? ? "  " : value.to_s + " "
-        print to_display
+        to_display = value.nil? ? 2 : value
+        print "#{chars[to_display]} "
       end
       puts "\n"
     end
@@ -52,6 +53,14 @@ class TicTacToe
 
   def test_fill
     self.fill_board
+  end
+
+  def any_winner?
+    # If turns less than 5, return nil - not enough moves for a winner.
+    # Check rows
+    # Check columns
+    # Check diagonals
+    # if true, return the winner!
   end
 
   private
