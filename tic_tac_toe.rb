@@ -51,16 +51,22 @@ class TicTacToe
     self.increment_turn()
   end
 
-  def test_fill
-    self.fill_board
-  end
-
   def any_winner?
     # If turns less than 5, return nil - not enough moves for a winner.
     # Check rows
     # Check columns
     # Check diagonals
     # if true, return the winner!
+  end
+
+  def test_fill
+    self.fill_board
+  end
+
+  def test_display
+    @board.each do |row|
+      p row
+    end
   end
 
   private
@@ -83,3 +89,4 @@ game.add_move(5, nil)
 game.show_board
 p game.board_full?
 p game.loc_empty?(5)
+game.test_display
