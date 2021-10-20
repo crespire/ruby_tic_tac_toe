@@ -1,10 +1,13 @@
+# frozen_string_literal: true
+
+# Class to handle game related functions
 class TicTacToe
   attr_reader :turn
 
-  def initialize(size=3)
+  def initialize(size = 3)
     @turn = 0
     @size = size
-    @board = Array.new(size) {Array.new(size, nil)}
+    @board = Array.new(size) { Array.new(size, nil) }
   end
 
   def show_board
@@ -21,7 +24,6 @@ class TicTacToe
 
   def coordinates(input)
     # Given an input of 1 through 9, translate that to the index numbers needed to access that space.
-    
     # 1 | 2 | 3
     # 4 | 5 | 6
     # 7 | 8 | 9
@@ -42,13 +44,13 @@ class TicTacToe
     @board[x][y].nil?
   end
 
-  def add_move(location, input="b")
+  def add_move(location, input = 'b')
     # Assume coordinates checked so space is empty
     # Add turn % 2 to the specified position otherwise, add specified input
     x, y = coordinates(location)
-    to_add = input == "b" ? @turn % 2 : input
+    to_add = input == 'b' ? @turn % 2 : input
     @board[x][y] = to_add
-    self.increment_turn()
+    increment_turn
   end
 
   def any_winner?
@@ -62,7 +64,7 @@ class TicTacToe
   end
 
   def test_fill
-    self.fill_board
+    fill_board
   end
 
   def test_display
@@ -72,8 +74,9 @@ class TicTacToe
   end
 
   private
+
   def fill_board
-    (@size ** 2).times { |i| self.add_move(i+1) }
+    (@size**2).times { |i| add_move(i + 1) }
   end
 
   def increment_turn
@@ -90,7 +93,7 @@ class TicTacToe
   end
 end
 
-game = TicTacToe.new()
+game = TicTacToe.new
 game.show_board
 game.test_fill
 game.show_board
