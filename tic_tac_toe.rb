@@ -41,6 +41,14 @@ class TicTacToe
     @board[x][y].empty?
   end
 
+  def add_move(location, input=nil)
+    # Assume coordinates checked so space is empty
+    # Add turn % 2 to the specified position
+    x, y = coordinates(location)
+    @board[x][y] = @turn % 2
+    self.increment_turn()
+  end
+
   def test_fill
     self.fill_board
   end
