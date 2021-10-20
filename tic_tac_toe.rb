@@ -36,16 +36,17 @@ class TicTacToe
     @board.none? { |row| row.include?(nil) }
   end
 
-  def is_loc_empty?(location)
+  def loc_empty?(location)
     x, y = coordinates(location)
-    @board[x][y].empty?
+    @board[x][y].nil?
   end
 
-  def add_move(location, input=nil)
+  def add_move(location, input="b")
     # Assume coordinates checked so space is empty
     # Add turn % 2 to the specified position
     x, y = coordinates(location)
-    @board[x][y] = @turn % 2
+    to_add = input == "b" ? @turn % 2 : input
+    @board[x][y] = to_add
     self.increment_turn()
   end
 
@@ -65,3 +66,11 @@ end
 
 game = TicTacToe.new()
 game.show_board
+game.test_fill
+game.show_board
+p game.board_full?
+p game.loc_empty?(5)
+game.add_move(5, nil)
+game.show_board
+p game.board_full?
+p game.loc_empty?(5)
