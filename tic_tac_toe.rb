@@ -49,6 +49,10 @@ class TicTacToe
   def fill_board
     (@size ** 2).times { |i| self.add_move(i+1) }
   end
+
+  def increment_turn
+    @turn += 1
+  end
 end
 
 game = TicTacToe.new()
