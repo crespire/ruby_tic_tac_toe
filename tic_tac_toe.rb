@@ -31,6 +31,10 @@ class TicTacToe
 
     map[input]
   end
+
+  def board_full?
+    @board.none? { |row| row.include?(nil) }
+  end
 end
 
 game = TicTacToe.new()
