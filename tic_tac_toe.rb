@@ -77,6 +77,15 @@ class TicTacToe
   def increment_turn
     @turn += 1
   end
+
+  def check_row_win
+  end
+
+  def check_col_win
+  end
+
+  def check_diag_win
+  end
 end
 
 game = TicTacToe.new()
