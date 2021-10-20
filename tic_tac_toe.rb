@@ -57,6 +57,8 @@ class TicTacToe
     # Check columns
     # Check diagonals
     # if true, return the winner!
+
+    return nil if @turns < 5
   end
 
   def test_fill
