@@ -43,7 +43,7 @@ class TicTacToe
 
   def add_move(location, input="b")
     # Assume coordinates checked so space is empty
-    # Add turn % 2 to the specified position
+    # Add turn % 2 to the specified position otherwise, add specified input
     x, y = coordinates(location)
     to_add = input == "b" ? @turn % 2 : input
     @board[x][y] = to_add
