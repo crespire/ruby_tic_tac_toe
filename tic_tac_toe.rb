@@ -40,6 +40,15 @@ class TicTacToe
     x, y = coordinates(location)
     @board[x][y].empty?
   end
+
+  def test_fill
+    self.fill_board
+  end
+
+  private
+  def fill_board
+    (@size ** 2).times { |i| self.add_move(i+1) }
+  end
 end
 
 game = TicTacToe.new()
