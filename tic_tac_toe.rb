@@ -35,6 +35,11 @@ class TicTacToe
   def board_full?
     @board.none? { |row| row.include?(nil) }
   end
+
+  def is_loc_empty?(location)
+    x, y = coordinates(location)
+    @board[x][y].empty?
+  end
 end
 
 game = TicTacToe.new()
