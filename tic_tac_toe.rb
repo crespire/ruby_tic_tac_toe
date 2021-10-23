@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
-# Class to handle game related functions
+# Class to handle board related functions
 class TicTacToe
   attr_reader :turn
+
+  BLANK_VALUE = Float::INFINITY
 
   def initialize(size = 3)
     @turn = 0
     @size = size.odd? ? size : size + 1
-    @board = Array.new(size) { Array.new(size, Float::INFINITY) }
+    @board = Array.new(size) { Array.new(size, BLANK_VALUE) }
   end
 
   def show_board
@@ -36,7 +38,7 @@ class TicTacToe
   end
 
   def board_full?
-    @board.none? { |row| row.include?(Float::INFINITY) }
+    @board.none? { |row| row.include?(BLANK_VALUE) }
   end
 
   def loc_empty?(location)
@@ -44,12 +46,11 @@ class TicTacToe
     @board[x][y].infinite? ? true : false
   end
 
-  def add_move(location, input = 'b')
+  def add_move(location, input = BLANK_VALUE)
     # Assume coordinates checked so space is empty
-    # Add turn % 2 to the specified position otherwise, add specified input
+    # Assume input is correct, but default to game blank. Check for errors in the Game class
     x, y = coordinates(location)
-    to_add = input == 'b' ? @turn % 2 : input
-    @board[x][y] = to_add
+    @board[x][y] = input
     increment_turn
   end
 
@@ -60,7 +61,10 @@ class TicTacToe
     # Check diagonals
     # if true, return the winner!
 
-    return false if @turns < 5
+    return false if @turn < 5
+    return true if check_row_win || check_col_win || check_diag_win
+    
+    false
   end
 
   def test_fill
@@ -110,7 +114,10 @@ class TicTacToe
     # else [0, size] and [size, 0] == check reverse board
     board_to_check = @board
     board_to_check = @board.each.map(&:reverse) if @board[0][@size - 1] == @board[@size - 1][0]
-    checksum = (0...@size).times{ |i| sum += board[i][i] }
+    checksum = 0
+    @size.times do |i|
+      checksum += board_to_check[i][i]
+    end
     checksum.zero? || checksum == @size ? true : false
   end
 end
@@ -125,4 +132,14 @@ game.add_move(5, Float::INFINITY)
 game.show_board
 p game.board_full?
 p game.loc_empty?(5)
-game.test_display)
+game.test_display
+
+game2 = TicTacToe.new
+game2.add_move(1)
+game2.add_move(2)
+game2.add_move(5)
+game2.add_move(6)
+game2.add_move(7)
+game2.test_display
+game2.show_board
+p game2.any_winner?
