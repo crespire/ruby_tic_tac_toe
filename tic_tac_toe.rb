@@ -7,7 +7,7 @@ class TicTacToe
 
   def initialize(size = 3)
     @size = size.odd? ? size : size + 1
-    @board = Array.new(size) { Array.new(size, BLANK_VALUE) }
+    @board = Array.new(@size) { Array.new(@size, BLANK_VALUE) }
     @coords = {}
 
     puts "New board: #{@size}"
@@ -156,6 +156,8 @@ class PlayGame
       @board = TicTacToe.new(answer)
       @positions = @board.max
       @turn = 0
+      puts "Should be new info\n"
+      @board.show_board
       play_round
     else
       exit
@@ -168,7 +170,4 @@ class PlayGame
 end
 
 tic = PlayGame.new()
-# tic.play_round
-
-test = TicTacToe.new(6)
-p test.show_board
+tic.play_round
