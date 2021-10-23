@@ -116,7 +116,6 @@ class PlayGame
 
   def play_round
     until @board.winner? || @board.full? do
-      puts "Turn: #{@turn}"
       @board.show_board
       valid = false
       until valid do
