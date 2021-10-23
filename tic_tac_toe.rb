@@ -161,7 +161,7 @@ class PlayGame
       valid = false
       until valid do
         new_max = 25
-        print "How many s? (9-#{new_max}) "
+        print "How many positions? (9-#{new_max}) "
         answer = Math.sqrt(gets.chomp.to_i)
         valid = true if answer.between?(9,new_max)
       end
