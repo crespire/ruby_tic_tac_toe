@@ -111,7 +111,7 @@ class Player
   end
 
   def get_choice
-    input = gets.chomp
+    gets.chomp
   end
 
 end
@@ -158,4 +158,4 @@ game3.show_board
 p game3.any_winner?
 
 p1 = Player.new("X", 0)
-p p1.get_input
+p p1.get_choice
