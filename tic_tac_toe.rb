@@ -139,7 +139,7 @@ class PlayGame
       @board.show_board
       valid = false
       until valid do
-        print "Player (#{(@turn % 2)+1}, please select a position to play (1 - #{@positions}): "
+        print "Player #{(@turn % 2)+1}, please select a position to play (1 - #{@positions}): "
         answer = @players.answer_prompt.to_i
         valid = true if @board.loc_valid?(answer) && @board.loc_empty?(answer)
       end
