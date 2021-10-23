@@ -133,36 +133,19 @@ class PlayGame
     #Get input for player 2, validate it and play it once validated and increment turn
     #If there are more than 5 turns, check if the new entries resulted in a win or if the board is full.
     # If not exit, play round again
-    @board.show_board
-    valid = false
-    until valid do
-      print "P1, please select a position to play (1 - #{@positions}): "
-      answer = @player1.answer_prompt.to_i
-      valid = true if @board.loc_valid?(answer) && @board.loc_empty?(answer)
-    end
 
-    @board.add_move(answer, @player1.data)
-    increment_turn
-    @board.show_board
+    until @board.board_full? || @board.any_winner? do
+      puts "Full? #{@board.board_full?}, Winner? #{@board.any_winner?}, Turn: #{@turn}"
+      @board.show_board
+      valid = false
+      until valid do
+        print "Player (#{(@turn % 2)+1}, please select a position to play (1 - #{@positions}): "
+        answer = @players.answer_prompt.to_i
+        valid = true if @board.loc_valid?(answer) && @board.loc_empty?(answer)
+      end
 
-    winner = @board.any_winner? if @turn > 5
-
-    valid = false
-    until valid && !winner do
-      print "P2, please select a position to play (1 - #{@positions}): "
-      answer = @player2.answer_prompt.to_i
-      valid = true if @board.loc_valid?(answer) && @board.loc_empty?(answer)
-    end
-
-    @board.add_move(answer, @player2.data)
-    increment_turn
-
-    winner = @board.any_winner? if @turn > 5
-    
-    if winner
-      play_again?
-    else
-      play_round
+      @board.add_move(answer, @turn % 2)
+      increment_turn
     end
   end
 
