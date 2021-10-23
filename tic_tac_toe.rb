@@ -10,6 +10,8 @@ class TicTacToe
     @board = Array.new(size) { Array.new(size, BLANK_VALUE) }
     @coords = {}
 
+    puts "New board: #{@size}"
+
     @max = 1
     @size.times do |x|
       @size.times do |y|
@@ -116,6 +118,7 @@ class PlayGame
 
   def play_round
     until @board.board_full? || @board.any_winner? do
+      puts "Turn: #{@turn}"
       @board.show_board
       valid = false
       until valid do
@@ -129,7 +132,8 @@ class PlayGame
     end
 
     @board.show_board
-    puts @board.board_full? ? "Tie game!" : "Player #{(@turn % 2)} won!"
+    win_msg = @turn.odd? ? "Player 1 won!" : "Player 2 won!"
+    puts @board.board_full? ? "Tie game!" : win_msg
     play_again?
   end
 
@@ -138,19 +142,16 @@ class PlayGame
     until valid do
       print "Did you want to play again? (y/n) "
       answer = gets.chomp.downcase
-      if answer == "y" || answer == "n"
-        valid = true
-      end
+      valid = true if ['y', 'n'].include?(answer)
     end
 
     if answer == "y" then
       valid = false
       until valid do
-        print "How many squares? "
+        new_max = 50
+        print "How many squares? (1-#{new_max}) "
         answer = gets.chomp.to_i
-        if answer.between?(1,100)
-          valid = true
-        end
+        valid = true if answer.between?(1,new_max)
       end
       @board = TicTacToe.new(answer)
       @positions = @board.max
@@ -164,6 +165,9 @@ class PlayGame
   def increment_turn
     @turn += 1
   end
+end
+
+module Testing
 end
 
 tic = PlayGame.new()
