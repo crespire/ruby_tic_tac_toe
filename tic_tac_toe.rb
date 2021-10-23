@@ -10,8 +10,6 @@ class TicTacToe
     @board = Array.new(@size) { Array.new(@size, BLANK_VALUE) }
     @coords = {}
 
-    puts "New board: #{@size}"
-
     @max = 1
     @size.times do |x|
       @size.times do |y|
@@ -156,8 +154,6 @@ class PlayGame
       @board = TicTacToe.new(answer)
       @positions = @board.max
       @turn = 0
-      puts "Should be new info\n"
-      @board.show_board
       play_round
     else
       exit
