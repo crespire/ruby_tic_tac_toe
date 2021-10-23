@@ -2,8 +2,6 @@
 
 # Class to handle board related functions
 class TicTacToe
-  attr_reader :turn
-
   BLANK_VALUE = Float::INFINITY
 
   def initialize(size = 3)
@@ -15,7 +13,7 @@ class TicTacToe
     chars = ['X', 'O', '-']
     @board.each do |row|
       row.each do |value|
-        to_display = value.finite? ? value : 2
+        to_display = value.infinite? ? 2 : value
         print "#{chars[to_display]} "
       end
       puts "\n"
