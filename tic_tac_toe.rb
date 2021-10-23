@@ -17,6 +17,8 @@ class TicTacToe
         @max += 1
       end
     end
+
+    @max -= 1 # Adjust max so we have the right number of elements.
   end
 
   def show_board
@@ -106,11 +108,8 @@ end
 
 # Class to handle input and validation of input
 class Player
-  attr_reader :token, :data
 
-  def initialize(token, data)
-    @token = token
-    @data = data
+  def initialize()
   end
 
   def answer_prompt
@@ -125,8 +124,7 @@ class PlayGame
     @board = TicTacToe.new(3)
     @positions = @board.max
 
-    @player1 = Player.new("X", 0)
-    @player2 = Player.new("O", 1)
+    @player = Player.new()
 
     @turn = 0
   end
@@ -139,27 +137,28 @@ class PlayGame
     @board.show_board
     valid = false
     until valid do
-      print "Please select a position to play (0 - #{@positions}): "
-      answer = @player1.answer_prompt
+      print "P1, please select a position to play (1 - #{@positions}): "
+      answer = @player1.answer_prompt.to_i
       valid = true if @board.loc_valid?(answer) && @board.loc_empty?(answer)
     end
 
-    @board.add_move(answer, player1.data)
+    @board.add_move(answer, @player1.data)
     increment_turn
     @board.show_board
+
+    winner = @board.any_winner? if @turn > 5
 
     valid = false
-    until valid do
-      print "Please select a position to play (0 - #{@positions}): "
-      answer = @player2.answer_prompt
+    until valid && !winner do
+      print "P2, please select a position to play (1 - #{@positions}): "
+      answer = @player2.answer_prompt.to_i
       valid = true if @board.loc_valid?(answer) && @board.loc_empty?(answer)
     end
 
-    @board.add_move(answer, player2.data)
+    @board.add_move(answer, @player2.data)
     increment_turn
-    @board.show_board
 
-    winner = @board.any_winner? if @turns > 5
+    winner = @board.any_winner? if @turn > 5
     
     if winner
       play_again?
@@ -185,13 +184,17 @@ class PlayGame
   end
 
   def increment_turn
-    @turn += 1 p
+    @turn += 1
   end
 end
 
 board_test = TicTacToe.new(3)
 p board_test.max
+p board_test.coords
 board_test.test_display
+(1...9).each { |i| p board_test.loc_valid?(i) }
+p board_test.loc_valid?(15)
+
 
 tic = PlayGame.new()
-# tic.play_round
+tic.play_round
