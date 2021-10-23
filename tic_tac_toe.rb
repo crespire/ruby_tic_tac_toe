@@ -167,8 +167,8 @@ class PlayGame
   end
 end
 
-module Testing
-end
-
 tic = PlayGame.new()
-tic.play_round
+# tic.play_round
+
+test = TicTacToe.new(6)
+p test.show_board
