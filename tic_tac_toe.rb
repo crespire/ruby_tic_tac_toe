@@ -28,7 +28,7 @@ class TicTacToe
       row.each do |value|
         to_display = value.infinite? ? 2 : value
         if map then
-          print "%01d " % loc
+          print "%02d " % loc
           loc += 1
         else 
           print "#{chars[to_display]} "
