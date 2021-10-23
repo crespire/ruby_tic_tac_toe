@@ -31,7 +31,6 @@ class TicTacToe
   end
 
   def coordinates(input)
-    # Given an input, spit out the coordinate pair we should use.
     @coords[input]
   end
 
@@ -45,8 +44,7 @@ class TicTacToe
   end
 
   def add_move(location, input = BLANK_VALUE)
-    # Assume coordinates checked so in bounds and space is empty. Check for errors in Game class
-    # Assume input is correct, but default to game blank. Check for errors in the Game class
+    # Assume params are valid (loc is in bounds, space is empty, and input is correct). Check for errors in Game class
     x, y = coordinates(location)
     @board[x][y] = input
   end
@@ -106,6 +104,14 @@ class TicTacToe
     end
     checksum.zero? || checksum == @size ? true : false
   end
+end
+
+# Class to handle input and validation of input
+class Player
+end
+
+# Class to handle playing the game
+class PlayGame
 end
 
 game = TicTacToe.new
