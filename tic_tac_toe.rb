@@ -117,7 +117,7 @@ class PlayGame
   end
 
   def play_round
-    until @board.board_full? || @board.any_winner? do
+    until @board.any_winner? || @board.board_full? do
       puts "Turn: #{@turn}"
       @board.show_board
       valid = false
@@ -133,7 +133,7 @@ class PlayGame
 
     @board.show_board
     win_msg = @turn.odd? ? "Player 1 won!" : "Player 2 won!"
-    puts @board.board_full? ? "Tie game!" : win_msg
+    puts @board.any_winner? ? win_msg : "Tie game!"
     play_again?
   end
 
