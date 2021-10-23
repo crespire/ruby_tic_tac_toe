@@ -60,9 +60,7 @@ class TicTacToe
   end
 
   def test_display
-    @board.each do |row|
-      p row
-    end
+    @board.each { |row| p row }
   end
 
   private
