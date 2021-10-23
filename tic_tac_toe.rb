@@ -13,7 +13,7 @@ class TicTacToe
   end
 
   def show_board
-    chars = ['X', 'O', ' ']
+    chars = ['X', 'O', '-']
     @board.each do |row|
       row.each do |value|
         to_display = value.finite? ? value : 2
@@ -128,7 +128,7 @@ game.test_fill
 game.show_board
 p game.board_full?
 p game.loc_empty?(5)
-game.add_move(5, game::BLANK_VALUE)
+game.add_move(5, TicTacToe::BLANK_VALUE)
 game.show_board
 p game.board_full?
 p game.loc_empty?(5)
@@ -140,6 +140,6 @@ game2.add_move(2)
 game2.add_move(5)
 game2.add_move(6)
 game2.add_move(7)
-game2.test_display
+p game2.test_display
 game2.show_board
 p game2.any_winner?
