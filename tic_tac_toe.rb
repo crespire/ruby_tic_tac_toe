@@ -110,9 +110,8 @@ class Player
     @data = data
   end
 
-  def get_input
-    print "What slot would you like to play? "
-    input = gets.chomp.to_i
+  def get_choice
+    input = gets.chomp
   end
 
 end
