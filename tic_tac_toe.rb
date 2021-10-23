@@ -63,7 +63,7 @@ class TicTacToe
 
     return false if @turn < 5
     return true if check_row_win || check_col_win || check_diag_win
-    
+
     false
   end
 
@@ -128,7 +128,7 @@ game.test_fill
 game.show_board
 p game.board_full?
 p game.loc_empty?(5)
-game.add_move(5, Float::INFINITY)
+game.add_move(5, game::BLANK_VALUE)
 game.show_board
 p game.board_full?
 p game.loc_empty?(5)
