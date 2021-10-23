@@ -154,7 +154,7 @@ class PlayGame
       until valid do
         new_max = 25
         print "How many positions? (1-#{new_max}) "
-        answer = gets.chomp.to_i / 2 
+        answer = Math.sqrt(gets.chomp.to_i)
         valid = true if answer.between?(1,new_max)
       end
       @board = TicTacToe.new(answer)
