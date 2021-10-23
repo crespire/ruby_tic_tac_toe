@@ -2,6 +2,7 @@
 
 # Class to handle board related functions
 class TicTacToe
+  attr_reader :max
   BLANK_VALUE = Float::INFINITY
 
   def initialize(size = 3)
@@ -9,11 +10,11 @@ class TicTacToe
     @board = Array.new(size) { Array.new(size, BLANK_VALUE) }
     @coords = {}
 
-    @loc = 1
+    @max = 1
     @size.times do |x|
       @size.times do |y|
-        @coords[@loc] = [x, y]
-        @loc += 1
+        @coords[@max] = [x, y]
+        @max += 1
       end
     end
   end
@@ -39,7 +40,7 @@ class TicTacToe
   end
 
   def loc_valid?(location)
-    (1..@loc).include?(location)
+    (1..@max).include?(location)
   end
 
   def loc_empty?(location)
@@ -120,6 +121,24 @@ end
 
 # Class to handle playing the game
 class PlayGame
+  def initialize
+    @board = TicTacToe.new(3)
+    @positions = @board.
+
+    @player1 = Player.new("X", 0)
+    @player2 = Player.new("O", 1)
+
+    @turn = 0
+  end
+
+  def play_round
+  end
+
+  def validate_input
+  end
+
+  def increment_turn
+  end
 end
 
 game = TicTacToe.new
