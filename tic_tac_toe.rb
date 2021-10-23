@@ -7,7 +7,6 @@ class TicTacToe
   BLANK_VALUE = Float::INFINITY
 
   def initialize(size = 3)
-    @turn = 0
     @size = size.odd? ? size : size + 1
     @board = Array.new(size) { Array.new(size, BLANK_VALUE) }
   end
@@ -51,16 +50,9 @@ class TicTacToe
     # Assume input is correct, but default to game blank. Check for errors in the Game class
     x, y = coordinates(location)
     @board[x][y] = input
-    increment_turn
   end
 
   def any_winner?
-    # If turns less than 5, return nil - not enough moves for a winner.
-    # Check rows
-    # Check columns
-    # Check diagonals
-    # if true, return the winner!
-
     return false if @turn < 5
     return true if check_row_win || check_col_win || check_diag_win
 
@@ -81,10 +73,6 @@ class TicTacToe
 
   def fill_board
     (@size**2).times { |i| add_move(i + 1, Random.rand(2)) }
-  end
-
-  def increment_turn
-    @turn += 1
   end
 
   def check_row_win
