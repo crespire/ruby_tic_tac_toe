@@ -12,7 +12,7 @@ class TicTacToe
     @loc = 1
     @size.times do |x|
       @size.times do |y|
-        @coords[loc] = [x, y]
+        @coords[@loc] = [x, y]
         @loc += 1
       end
     end
