@@ -9,7 +9,7 @@ class TicTacToe
     @board = Array.new(size) { Array.new(size, BLANK_VALUE) }
     @coords = {}
 
-    loc = 1
+    @loc = 1
     @size.times do |x|
       @size.times do |y|
         @coords[loc] = [x, y]
@@ -41,6 +41,10 @@ class TicTacToe
   def loc_empty?(location)
     x, y = coordinates(location)
     @board[x][y].infinite? ? true : false
+  end
+
+  def loc_valid?(location)
+    (1..@loc).include?(location)
   end
 
   def add_move(location, input = BLANK_VALUE)
@@ -101,6 +105,16 @@ end
 
 # Class to handle input and validation of input
 class Player
+  def initialize(token, data)
+    @token = token
+    @data = data
+  end
+
+  def get_input
+    print "What slot would you like to play? "
+    input = gets.chomp.to_i
+  end
+
 end
 
 # Class to handle playing the game
@@ -143,3 +157,6 @@ game3.add_move(24, 1)
 p game3.test_display
 game3.show_board
 p game3.any_winner?
+
+p1 = Player.new("X", 0)
+p p1.get_input
