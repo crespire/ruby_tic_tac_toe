@@ -9,7 +9,7 @@ class TicTacToe
     @board = Array.new(size) { Array.new(size, BLANK_VALUE) }
     @coords = {}
     loc = 1
-    
+
     @size.times do |x|
       @size.times do |y|
         @coords[loc] = [x, y]
@@ -31,16 +31,7 @@ class TicTacToe
   end
 
   def coordinates(input)
-    # Given an input of 1 through 9, translate that to the index numbers needed to access that space.
-    # 1 | 2 | 3
-    # 4 | 5 | 6
-    # 7 | 8 | 9
-
-    #map = { 1 => [0, 0], 2 => [0, 1], 3 => [0, 2],
-     #       4 => [1, 0], 5 => [1, 1], 6 => [1, 2],
-      #      7 => [2, 0], 8 => [2, 1], 9 => [2, 2] }
-
-    #map[input]
+    # Given an input, spit out the coordinate pair we should use.
     @coords[input]
   end
 
@@ -54,7 +45,7 @@ class TicTacToe
   end
 
   def add_move(location, input = BLANK_VALUE)
-    # Assume coordinates checked so space is empty
+    # Assume coordinates checked so in bounds and space is empty. Check for errors in Game class
     # Assume input is correct, but default to game blank. Check for errors in the Game class
     x, y = coordinates(location)
     @board[x][y] = input
@@ -138,3 +129,18 @@ game2.add_move(7, 0)
 p game2.test_display
 game2.show_board
 p game2.any_winner?
+
+game3 = TicTacToe.new(5)
+game3.add_move(1, 0)
+game3.add_move(2, 0)
+game3.add_move(3, 0)
+game3.add_move(4, 1)
+game3.add_move(5, 0)
+game3.add_move(15, 1)
+game3.add_move(9, 1)
+game3.add_move(14, 1)
+game3.add_move(19, 1)
+game3.add_move(24, 1)
+p game3.test_display
+game3.show_board
+p game3.any_winner?
