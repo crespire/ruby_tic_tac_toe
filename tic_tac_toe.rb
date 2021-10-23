@@ -7,6 +7,15 @@ class TicTacToe
   def initialize(size = 3)
     @size = size.odd? ? size : size + 1
     @board = Array.new(size) { Array.new(size, BLANK_VALUE) }
+    @coords = {}
+    loc = 1
+    
+    @size.times do |x|
+      @size.times do |y|
+        @coords[loc] = [x, y]
+        loc += 1
+      end
+    end
   end
 
   def show_board
@@ -27,11 +36,12 @@ class TicTacToe
     # 4 | 5 | 6
     # 7 | 8 | 9
 
-    map = { 1 => [0, 0], 2 => [0, 1], 3 => [0, 2],
-            4 => [1, 0], 5 => [1, 1], 6 => [1, 2],
-            7 => [2, 0], 8 => [2, 1], 9 => [2, 2] }
+    #map = { 1 => [0, 0], 2 => [0, 1], 3 => [0, 2],
+     #       4 => [1, 0], 5 => [1, 1], 6 => [1, 2],
+      #      7 => [2, 0], 8 => [2, 1], 9 => [2, 2] }
 
-    map[input]
+    #map[input]
+    @coords[input]
   end
 
   def board_full?
