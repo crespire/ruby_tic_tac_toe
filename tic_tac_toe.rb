@@ -80,7 +80,7 @@ class TicTacToe
   private
 
   def fill_board
-    (@size**2).times { |i| add_move(i + 1) }
+    (@size**2).times { |i| add_move(i + 1, Random.rand(2)) }
   end
 
   def increment_turn
@@ -135,11 +135,11 @@ p game.loc_empty?(5)
 game.test_display
 
 game2 = TicTacToe.new
-game2.add_move(1)
-game2.add_move(2)
-game2.add_move(5)
-game2.add_move(6)
-game2.add_move(7)
+game2.add_move(1, 0)
+game2.add_move(2, 1)
+game2.add_move(5, 0)
+game2.add_move(6, 1)
+game2.add_move(7, 0)
 p game2.test_display
 game2.show_board
 p game2.any_winner?
