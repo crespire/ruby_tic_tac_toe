@@ -105,6 +105,8 @@ end
 
 # Class to handle input and validation of input
 class Player
+  attr_reader :token, :data
+
   def initialize(token, data)
     @token = token
     @data = data
