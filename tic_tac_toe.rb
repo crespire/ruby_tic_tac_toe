@@ -2,7 +2,6 @@
 
 # Class to handle board related functions
 class TicTacToe
-  attr_reader :max
   BLANK_VALUE = Float::INFINITY
 
   def initialize(size = 3)
@@ -123,7 +122,6 @@ end
 class PlayGame
   def initialize
     @board = TicTacToe.new(3)
-    @positions = @board.max
 
     @player1 = Player.new("X", 0)
     @player2 = Player.new("O", 1)
