@@ -162,10 +162,10 @@ class PlayGame
       until valid do
         new_max = 25
         print "How many positions? (9-#{new_max}) "
-        answer = Math.sqrt(gets.chomp.to_i)
-        valid = true if answer.between?(9,new_max)
+        answer = gets.chomp.to_i
+        valid = true if answer.between?(9, new_max)
       end
-      @board = TicTacToe.new(answer.to_i)
+      @board = TicTacToe.new(Math.sqrt(answer).to_i)
       @positions = @board.max
       @turn = 0
       play_round
