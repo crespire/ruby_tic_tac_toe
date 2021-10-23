@@ -80,10 +80,7 @@ class TicTacToe
   end
 
   def check_col_win
-    col_ind = (0...@size)
-    # For each column, add the row value at the column index to checksum
-    # If checksum is 0 or board size, then return a win.
-    col_ind.each do |i|
+    @size.times do |i|
       checksum = 0
       @board.each do |row|
         checksum += row[i]
@@ -94,8 +91,6 @@ class TicTacToe
   end
 
   def check_diag_win
-    # Check [0,0] and [size,size] == then check normal board
-    # else [0, size] and [size, 0] == check reverse board
     board_to_check = @board
     board_to_check = @board.each.map(&:reverse) if @board[0][@size - 1] == @board[@size - 1][0]
     checksum = 0
