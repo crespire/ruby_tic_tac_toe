@@ -2,7 +2,7 @@
 
 # Class to handle board related functions
 class TicTacToe
-  attr_reader :max
+  attr_reader :max, :coords
   BLANK_VALUE = Float::INFINITY
 
   def initialize(size = 3)
@@ -185,12 +185,13 @@ class PlayGame
   end
 
   def increment_turn
-    @turn += 1
+    @turn += 1 p
   end
 end
 
 board_test = TicTacToe.new(3)
 p board_test.max
+board_test.test_display
 
 tic = PlayGame.new()
 # tic.play_round
