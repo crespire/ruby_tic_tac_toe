@@ -157,7 +157,7 @@ class PlayGame
         answer = Math.sqrt(gets.chomp.to_i)
         valid = true if answer.between?(1,new_max)
       end
-      @board = TicTacToe.new(answer)
+      @board = TicTacToe.new(answer.to_i)
       @positions = @board.max
       @turn = 0
       play_round
