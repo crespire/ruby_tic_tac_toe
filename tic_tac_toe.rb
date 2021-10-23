@@ -2,7 +2,7 @@
 
 # Class to handle board related functions
 class TicTacToe
-  attr_reader :max, :coords
+  attr_reader :max
   BLANK_VALUE = Float::INFINITY
 
   def initialize(size = 3)
@@ -51,7 +51,6 @@ class TicTacToe
   end
 
   def add_move(location, input = BLANK_VALUE)
-    # Assume params are valid (loc is in bounds, space is empty, and input is correct). Check for errors in Game class
     x, y = coordinates(location)
     @board[x][y] = input
   end
@@ -106,77 +105,66 @@ class TicTacToe
   end
 end
 
-# Class to handle input and validation of input
-class Player
-  def initialize()
-  end
-
-  def answer_prompt
-    gets.chomp
-  end
-
-end
-
 # Class to handle playing the game
 class PlayGame
   def initialize
     @board = TicTacToe.new(3)
     @positions = @board.max
 
-    @players = Player.new()
-
     @turn = 0
   end
 
   def play_round
-    #Get input for player 1, validate it and play it once validated and increment turn
-    #Get input for player 2, validate it and play it once validated and increment turn
-    #If there are more than 5 turns, check if the new entries resulted in a win or if the board is full.
-    # If not exit, play round again
-
     until @board.board_full? || @board.any_winner? do
-      puts "Full? #{@board.board_full?}, Winner? #{@board.any_winner?}, Turn: #{@turn}"
       @board.show_board
       valid = false
       until valid do
         print "Player #{(@turn % 2)+1}, please select a position to play (1 - #{@positions}): "
-        answer = @players.answer_prompt.to_i
+        answer = gets.chomp.to_i
         valid = true if @board.loc_valid?(answer) && @board.loc_empty?(answer)
       end
 
       @board.add_move(answer, @turn % 2)
       increment_turn
     end
+
+    @board.show_board
+    puts @board.board_full? ? "Tie game!" : "Player #{(@turn % 2)} won!"
+    play_again?
   end
 
   def play_again?
-    #Get input for player 1, validate it
-    #Get input for player 2, validate it
-    #If both inputs are y, play again else exit
-    exit
-  end
+    valid = false
+    until valid do
+      print "Did you want to play again? (y/n) "
+      answer = gets.chomp.downcase
+      if answer == "y" || answer == "n"
+        valid = true
+      end
+    end
 
-  def validate_position
-    #Check if the entered position is valid - is it in bounds? Is it empty?
-
-  end
-
-  def validate_yn
-    #Check if the answer is valid - yes or no?
+    if answer == "y" then
+      valid = false
+      until valid do
+        print "How many squares? "
+        answer = gets.chomp.to_i
+        if answer.between?(1,100)
+          valid = true
+        end
+      end
+      @board = TicTacToe.new(answer)
+      @positions = @board.max
+      @turn = 0
+      play_round
+    else
+      exit
+    end
   end
 
   def increment_turn
     @turn += 1
   end
 end
-
-board_test = TicTacToe.new(3)
-p board_test.max
-p board_test.coords
-board_test.test_display
-(1...9).each { |i| p board_test.loc_valid?(i) }
-p board_test.loc_valid?(15)
-
 
 tic = PlayGame.new()
 tic.play_round
