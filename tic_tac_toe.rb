@@ -6,15 +6,15 @@ class TicTacToe
 
   def initialize(size = 3)
     @turn = 0
-    @size = size
-    @board = Array.new(size) { Array.new(size, nil) }
+    @size = size.odd? ? size : size + 1
+    @board = Array.new(size) { Array.new(size, Float::INFINITY) }
   end
 
   def show_board
     chars = ['X', 'O', ' ']
     @board.each do |row|
       row.each do |value|
-        to_display = value.nil? ? 2 : value
+        to_display = value.finite? ? value : 2
         print "#{chars[to_display]} "
       end
       puts "\n"
@@ -36,12 +36,12 @@ class TicTacToe
   end
 
   def board_full?
-    @board.none? { |row| row.include?(nil) }
+    @board.none? { |row| row.include?(Float::INFINITY) }
   end
 
   def loc_empty?(location)
     x, y = coordinates(location)
-    @board[x][y].nil?
+    @board[x][y].infinite? ? true : false
   end
 
   def add_move(location, input = 'b')
@@ -60,7 +60,7 @@ class TicTacToe
     # Check diagonals
     # if true, return the winner!
 
-    return nil if @turns < 5
+    return false if @turns < 5
   end
 
   def test_fill
@@ -84,12 +84,38 @@ class TicTacToe
   end
 
   def check_row_win
+    @board.each do |row|
+      checksum = row.reduce(:+)
+      return true if checksum.zero? || checksum == @size
+    end
+    false
   end
 
   def check_col_win
+    col_ind = (0...@size)
+    # For each column, add the row value at the column index to checksum
+    # If checksum is 0 or board size, then return a win.
+    col_ind.each do |i|
+      checksum = 0
+      @board.each do |row|
+        checksum += row[i]
+      end
+      return true if checksum.zero? || checksum == @size
+    end
+    false
   end
 
   def check_diag_win
+    # to check \, for board size, check @board[i][i],
+    (0...@size).times do |i|
+      checksum += @board[i][i]
+    end
+    if checksum.zero? || checksum == @size
+      return true      
+    else
+      # to check /, reverse every row, and check @board_reverse[i][i]
+    end
+    false
   end
 end
 
@@ -99,8 +125,12 @@ game.test_fill
 game.show_board
 p game.board_full?
 p game.loc_empty?(5)
-game.add_move(5, nil)
+game.add_move(5, Float::INFINITY)
 game.show_board
 p game.board_full?
 p game.loc_empty?(5)
 game.test_display
+
+
+board = [[0, Float::INFINITY, 1], [Float::INFINITY, 1, 0], [1, Float::INFINITY, Float::INFINITY]]
+board_rev = board.reverse_each()
