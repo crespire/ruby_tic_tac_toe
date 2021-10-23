@@ -13,7 +13,7 @@ class TicTacToe
     @size.times do |x|
       @size.times do |y|
         @coords[loc] = [x, y]
-        loc += 1
+        @loc += 1
       end
     end
   end
@@ -38,13 +38,13 @@ class TicTacToe
     @board.none? { |row| row.include?(BLANK_VALUE) }
   end
 
+  def loc_valid?(location)
+    (1..@loc).include?(location)
+  end
+
   def loc_empty?(location)
     x, y = coordinates(location)
     @board[x][y].infinite? ? true : false
-  end
-
-  def loc_valid?(location)
-    (1..@loc).include?(location)
   end
 
   def add_move(location, input = BLANK_VALUE)
