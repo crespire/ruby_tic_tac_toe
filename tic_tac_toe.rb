@@ -110,7 +110,7 @@ class Player
     @data = data
   end
 
-  def get_choice
+  def answer_prompt
     gets.chomp
   end
 
@@ -158,4 +158,4 @@ game3.show_board
 p game3.any_winner?
 
 p1 = Player.new("X", 0)
-p p1.get_choice
+p p1.answer_prompt
