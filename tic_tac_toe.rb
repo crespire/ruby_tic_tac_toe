@@ -37,7 +37,7 @@ class TicTacToe
     @coords[input]
   end
 
-  def board_full?
+  def full?
     @board.none? { |row| row.include?(BLANK_VALUE) }
   end
 
@@ -55,7 +55,7 @@ class TicTacToe
     @board[x][y] = input
   end
 
-  def any_winner?
+  def winner?
     return true if check_row_win || check_col_win || check_diag_win
 
     false
@@ -115,7 +115,7 @@ class PlayGame
   end
 
   def play_round
-    until @board.any_winner? || @board.board_full? do
+    until @board.winner? || @board.full? do
       puts "Turn: #{@turn}"
       @board.show_board
       valid = false
@@ -131,7 +131,7 @@ class PlayGame
 
     @board.show_board
     win_msg = @turn.odd? ? "Player 1 won!" : "Player 2 won!"
-    puts @board.any_winner? ? win_msg : "Tie game!"
+    puts @board.winner? ? win_msg : "Tie game!"
     play_again?
   end
 
