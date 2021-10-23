@@ -101,13 +101,21 @@ class TicTacToe
   end
 
   def check_diag_win
-    board_to_check = @board
-    board_to_check = @board.each.map(&:reverse) if @board[0][@size - 1] == @board[@size - 1][0]
-    checksum = 0
+    board_reg = @board
+    board_rev = @board.each.map(&:reverse)
+    checksum_for = 0
+    checksum_rev = 0
     @size.times do |i|
-      checksum += board_to_check[i][i]
+      checksum_for += board_reg[i][i]
+      checksum_rev += board_rev[i][i]
     end
-    checksum.zero? || checksum == @size ? true : false
+
+    if checksum_for.finite? then
+      return true if checksum_for.zero? || checksum_for == @size
+    elsif checksum_rev.finite? then
+      return true if chcksum_rev.zero? || checksum_rev == @size
+    end
+    false
   end
 end
 
