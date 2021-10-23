@@ -106,16 +106,12 @@ class TicTacToe
   end
 
   def check_diag_win
-    # to check \, for board size, check @board[i][i],
-    (0...@size).times do |i|
-      checksum += @board[i][i]
-    end
-    if checksum.zero? || checksum == @size
-      return true      
-    else
-      # to check /, reverse every row, and check @board_reverse[i][i]
-    end
-    false
+    # Check [0,0] and [size,size] == then check normal board
+    # else [0, size] and [size, 0] == check reverse board
+    board_to_check = @board
+    board_to_check = @board.each.map(&:reverse) if @board[0][@size - 1] == @board[@size - 1][0]
+    checksum = (0...@size).times{ |i| sum += board[i][i] }
+    checksum.zero? || checksum == @size ? true : false
   end
 end
 
@@ -129,8 +125,4 @@ game.add_move(5, Float::INFINITY)
 game.show_board
 p game.board_full?
 p game.loc_empty?(5)
-game.test_display
-
-
-board = [[0, Float::INFINITY, 1], [Float::INFINITY, 1, 0], [1, Float::INFINITY, Float::INFINITY]]
-board_rev = board.reverse_each()
+game.test_display)
