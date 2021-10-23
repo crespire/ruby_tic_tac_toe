@@ -61,7 +61,6 @@ class TicTacToe
   end
 
   def any_winner?
-    return false if @turn < 5
     return true if check_row_win || check_col_win || check_diag_win
 
     false
