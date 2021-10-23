@@ -8,8 +8,8 @@ class TicTacToe
     @size = size.odd? ? size : size + 1
     @board = Array.new(size) { Array.new(size, BLANK_VALUE) }
     @coords = {}
-    loc = 1
 
+    loc = 1
     @size.times do |x|
       @size.times do |y|
         @coords[loc] = [x, y]
