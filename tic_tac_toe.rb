@@ -147,7 +147,7 @@ class PlayGame
       valid = false
       until valid do
         new_max = 50
-        print "How many squares? (1-#{new_max}) "
+        print "How many positions? (1-#{new_max}) "
         answer = gets.chomp.to_i
         valid = true if answer.between?(1,new_max)
       end
