@@ -108,7 +108,6 @@ end
 
 # Class to handle input and validation of input
 class Player
-
   def initialize()
   end
 
@@ -124,7 +123,7 @@ class PlayGame
     @board = TicTacToe.new(3)
     @positions = @board.max
 
-    @player = Player.new()
+    @players = Player.new()
 
     @turn = 0
   end
