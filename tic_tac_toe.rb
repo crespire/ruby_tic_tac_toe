@@ -123,7 +123,7 @@ end
 class PlayGame
   def initialize
     @board = TicTacToe.new(3)
-    @positions = @board.
+    @positions = @board.max
 
     @player1 = Player.new("X", 0)
     @player2 = Player.new("O", 1)
@@ -132,12 +132,29 @@ class PlayGame
   end
 
   def play_round
+    #Get input for player 1, validate it and play it once validated and increment turn
+    #Get input for player 2, validate it and play it once validated and increment turn
+    #If there are more than 5 turns, check if the new entries resulted in a win or if the board is full.
+    # If not exit, play round again
   end
 
-  def validate_input
+  def play_again?
+    #Get input for player 1, validate it
+    #Get input for player 2, validate it
+    #If both inputs are y, play again else exit
+  end
+
+  def validate_position
+    #Check if the entered position is valid - is it in bounds? Is it empty?
+
+  end
+
+  def validate_yn
+    #Check if the answer is valid - yes or no?
   end
 
   def increment_turn
+    @turn += 1
   end
 end
 
