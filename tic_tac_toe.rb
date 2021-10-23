@@ -2,6 +2,7 @@
 
 # Class to handle board related functions
 class TicTacToe
+  attr_reader :max
   BLANK_VALUE = Float::INFINITY
 
   def initialize(size = 3)
@@ -122,6 +123,7 @@ end
 class PlayGame
   def initialize
     @board = TicTacToe.new(3)
+    @positions = @board.max
 
     @player1 = Player.new("X", 0)
     @player2 = Player.new("O", 1)
@@ -134,12 +136,43 @@ class PlayGame
     #Get input for player 2, validate it and play it once validated and increment turn
     #If there are more than 5 turns, check if the new entries resulted in a win or if the board is full.
     # If not exit, play round again
+    @board.show_board
+    valid = false
+    until valid do
+      print "Please select a position to play (0 - #{@positions}): "
+      answer = @player1.answer_prompt
+      valid = true if @board.loc_valid?(answer) && @board.loc_empty?(answer)
+    end
+
+    @board.add_move(answer, player1.data)
+    increment_turn
+    @board.show_board
+
+    valid = false
+    until valid do
+      print "Please select a position to play (0 - #{@positions}): "
+      answer = @player2.answer_prompt
+      valid = true if @board.loc_valid?(answer) && @board.loc_empty?(answer)
+    end
+
+    @board.add_move(answer, player2.data)
+    increment_turn
+    @board.show_board
+
+    winner = @board.any_winner? if @turns > 5
+    
+    if winner
+      play_again?
+    else
+      play_round
+    end
   end
 
   def play_again?
     #Get input for player 1, validate it
     #Get input for player 2, validate it
     #If both inputs are y, play again else exit
+    exit
   end
 
   def validate_position
@@ -156,42 +189,8 @@ class PlayGame
   end
 end
 
-game = TicTacToe.new
-game.show_board
-game.test_fill
-game.show_board
-p game.board_full?
-p game.loc_empty?(5)
-game.add_move(5, TicTacToe::BLANK_VALUE)
-game.show_board
-p game.board_full?
-p game.loc_empty?(5)
-game.test_display
+board_test = TicTacToe.new(3)
+p board_test.max
 
-game2 = TicTacToe.new
-game2.add_move(1, 0)
-game2.add_move(2, 1)
-game2.add_move(5, 0)
-game2.add_move(6, 1)
-game2.add_move(7, 0)
-p game2.test_display
-game2.show_board
-p game2.any_winner?
-
-game3 = TicTacToe.new(5)
-game3.add_move(1, 0)
-game3.add_move(2, 0)
-game3.add_move(3, 0)
-game3.add_move(4, 1)
-game3.add_move(5, 0)
-game3.add_move(15, 1)
-game3.add_move(9, 1)
-game3.add_move(14, 1)
-game3.add_move(19, 1)
-game3.add_move(24, 1)
-p game3.test_display
-game3.show_board
-p game3.any_winner?
-
-p1 = Player.new("X", 0)
-p p1.answer_prompt
+tic = PlayGame.new()
+# tic.play_round
