@@ -22,16 +22,12 @@ class TicTacToe
   end
 
   def show_board()
-    chars = ['x', 'o', '-']
+    chars = [' x', ' o']
     loc = 1
     @board.each do |row|
       row.each do |value|
         to_display = value.infinite? ? 2 : value
-        if (chars[to_display] == '-') then
-          print "#{loc} "
-        else
-          print "#{chars[to_display]} "
-        end
+        print to_display == 2 ? "%02d " % loc : "#{chars[to_display]} "
         loc += 1
       end
       puts "\n"
@@ -101,7 +97,7 @@ class TicTacToe
   end
 
   def check_diag_win
-    board_reg = @board
+    board_reg = @board.dup
     board_rev = @board.each.map(&:reverse)
     checksum_for = 0
     checksum_rev = 0
@@ -110,11 +106,12 @@ class TicTacToe
       checksum_rev += board_rev[i][i]
     end
 
-    if checksum_for.finite? then
+    if checksum_for.finite?
       return true if checksum_for.zero? || checksum_for == @size
-    elsif checksum_rev.finite? then
+    elsif checksum_rev.finite?
       return true if checksum_rev.zero? || checksum_rev == @size
     end
+
     false
   end
 end
