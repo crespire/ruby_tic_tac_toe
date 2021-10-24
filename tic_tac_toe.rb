@@ -22,7 +22,7 @@ class TicTacToe
   end
 
   def show_board()
-    chars = ['X', 'O']
+    chars = %w[X O]
     loc = 1
     @board.each do |row|
       row.each do |value|
