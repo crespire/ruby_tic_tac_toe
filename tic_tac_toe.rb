@@ -27,7 +27,7 @@ class TicTacToe
     @board.each do |row|
       row.each do |value|
         to_display = value.infinite? ? 2 : value
-        print to_display == 2 ? "#{loc}".center(3) : "#{chars[to_display]}".center(3)
+        print to_display == 2 ? loc.to_s.center(3) : chars[to_display].to_s.center(3)
         loc += 1
       end
       puts "\n"
