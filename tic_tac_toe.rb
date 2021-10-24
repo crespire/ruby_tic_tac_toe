@@ -21,18 +21,18 @@ class TicTacToe
     @max -= 1 # Adjust max so we have the right number of elements.
   end
 
-  def show_board(map=false)
-    chars = ['X', 'O', '-']
+  def show_board()
+    chars = ['x', 'o', '-']
     loc = 1
     @board.each do |row|
       row.each do |value|
         to_display = value.infinite? ? 2 : value
-        if map then
-          print "%02d " % loc
-          loc += 1
-        else 
+        if (chars[to_display] == '-') then
+          print "#{loc} "
+        else
           print "#{chars[to_display]} "
         end
+        loc += 1
       end
       puts "\n"
     end
@@ -113,7 +113,7 @@ class TicTacToe
     if checksum_for.finite? then
       return true if checksum_for.zero? || checksum_for == @size
     elsif checksum_rev.finite? then
-      return true if chcksum_rev.zero? || checksum_rev == @size
+      return true if checksum_rev.zero? || checksum_rev == @size
     end
     false
   end
@@ -129,9 +129,8 @@ class PlayGame
   end
 
   def play_round
-    @board.show_board(true)
     until @board.winner? || @board.full? do
-      @board.show_board if @turn > 0
+      @board.show_board
       valid = false
       until valid do
         print "Player #{(@turn % 2)+1}, please select a position to play (1 - #{@positions}): "
