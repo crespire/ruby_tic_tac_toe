@@ -22,12 +22,12 @@ class TicTacToe
   end
 
   def show_board()
-    chars = [' x', ' o']
+    chars = ['X', 'O']
     loc = 1
     @board.each do |row|
       row.each do |value|
         to_display = value.infinite? ? 2 : value
-        print to_display == 2 ? "%02d " % loc : "#{chars[to_display]} "
+        print to_display == 2 ? "#{loc}".center(3) : "#{chars[to_display]}".center(3)
         loc += 1
       end
       puts "\n"
