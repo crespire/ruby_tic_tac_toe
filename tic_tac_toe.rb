@@ -49,7 +49,7 @@ class TicTacToe
 
   def loc_empty?(location)
     x, y = coordinates(location)
-    @board[x][y].infinite? ? true : false
+    @board[x][y].infinite?
   end
 
   def add_move(location, input = BLANK_VALUE)
