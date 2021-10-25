@@ -24,15 +24,15 @@ class TicTacToe
   def show_board()
     chars = %w[X O]
     loc = 1
-    print '---' * @size + '-' * (@size - 1) + "\n"
+    print '----' * @size + '-' * (@size - 1) + "\n"
     @board.each do |row|
       row.each do |value|
         to_display = value.infinite? ? 2 : value
-        print to_display == 2 ? loc.to_s.center(3) : chars[to_display].to_s.center(3)
+        print to_display == 2 ? loc.to_s.center(4) : chars[to_display].to_s.center(4)
         print '|' if (loc % @size).positive?
         loc += 1
       end
-      print "\n" + '---' * @size + '-' * (@size - 1) + "\n"
+      print "\n" + '----' * @size + '-' * (@size - 1) + "\n"
     end
     puts "\n"
   end
