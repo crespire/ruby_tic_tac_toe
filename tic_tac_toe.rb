@@ -118,7 +118,7 @@ class PlayGame
   end
 
   def play_round
-    until @board.winner? || @board.full? do
+    until @board.winner? || @board.full?
       @board.show_board
       valid = false
       until valid

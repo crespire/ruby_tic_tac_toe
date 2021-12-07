@@ -42,6 +42,14 @@ describe TicTacToe do
       it 'returns false when the board has a spot open' do
       end
     end
+
+    context 'for a custom board' do
+      it 'returns true when the board is full' do
+      end
+
+      it 'returns false when the board has a free spot' do
+      end
+    end
   end
 
   describe '#loc_valid?' do
@@ -77,5 +85,37 @@ describe TicTacToe do
       it 'returns nil if the location is out of bounds' do
       end
     end
+  end
+
+  describe '#add_move' do
+    context 'for the standard board' do
+      it 'adds a move to the board' do
+      end
+
+      it 'adds a blank value if no input is specified' do
+      end
+    end
+  end
+
+  describe '#winner?' do
+    context 'for the standard board' do
+      it 'returns true for a row win'do
+        
+      end
+
+      it 'returns true for a column win' do
+        
+      end
+
+      it 'returns true for a / diagonal win' do
+        
+      end
+
+      it 'returns true for a \ diagonal win' do
+        
+      end
+    end
+
+    
   end
 end
