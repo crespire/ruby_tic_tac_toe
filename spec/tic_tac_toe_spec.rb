@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../tic_tac_toe.rb'
+require_relative '../main.rb'
 
 describe TicTacToe do
   describe '#initialize' do
@@ -116,6 +116,6 @@ describe TicTacToe do
       end
     end
 
-    
+
   end
 end
