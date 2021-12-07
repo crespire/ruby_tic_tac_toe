@@ -37,10 +37,6 @@ class TicTacToe
     puts "\n"
   end
 
-  def coordinates(input)
-    @coords[input]
-  end
-
   def full?
     @board.none? { |row| row.include?(BLANK_VALUE) }
   end
@@ -50,6 +46,8 @@ class TicTacToe
   end
 
   def loc_empty?(location)
+    return nil unless loc_valid?(location)
+
     x, y = coordinates(location)
     @board[x][y].infinite?
   end
@@ -65,18 +63,10 @@ class TicTacToe
     false
   end
 
-  def test_fill
-    fill_board
-  end
-
-  def test_display
-    @board.each { |row| p row }
-  end
-
   private
 
-  def fill_board
-    (@size**2).times { |i| add_move(i + 1, Random.rand(2)) }
+  def coordinates(input)
+    @coords[input]
   end
 
   def check_row_win
@@ -131,8 +121,8 @@ class PlayGame
     until @board.winner? || @board.full? do
       @board.show_board
       valid = false
-      until valid do
-        print "Player #{(@turn % 2)+1}, please select a position to play (1 - #{@positions}): "
+      until valid
+        print "Player #{(@turn % 2) + 1}, please select a position to play (1 - #{@positions}): "
         answer = gets.chomp.to_i
         valid = true if @board.loc_valid?(answer) && @board.loc_empty?(answer)
       end
