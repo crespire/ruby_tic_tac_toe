@@ -8,7 +8,7 @@ describe TicTacToe do
       subject(:game) { described_class.new }
 
       it 'makes a board of the right size' do
-        blank = described_class::BLANK_VALUE
+        blank = Float::INFINITY
         board = game.instance_variable_get(:@board)
         expect(board).to eq([[blank, blank, blank], [blank, blank, blank], [blank, blank, blank]])
       end
@@ -27,7 +27,7 @@ describe TicTacToe do
       subject(:game5) { described_class.new(5) }
 
       it 'makes a board of the right size' do
-        blank = described_class::BLANK_VALUE
+        blank = Float::INFINITY
         board = game5.instance_variable_get(:@board)
         expect(board).to eq([[blank, blank, blank, blank, blank], [blank, blank, blank, blank, blank], [blank, blank, blank, blank, blank], [blank, blank, blank, blank, blank], [blank, blank, blank, blank, blank]])
       end
