@@ -167,5 +167,5 @@ class PlayGame
   end
 end
 
-tic = PlayGame.new()
-tic.play_round
+#tic = PlayGame.new()
+#tic.play_round
