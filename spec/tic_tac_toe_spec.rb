@@ -13,9 +13,9 @@ describe TicTacToe do
         expect(board).to eq([[blank, blank, blank], [blank, blank, blank], [blank, blank, blank]])
       end
 
-      it 'generates the correct coordinates map' do
+      it 'generates the correct coordinates for second to last cell' do
         coords = game.instance_variable_get(:@coords)
-        expect(coords.keys.length).to eq(9)
+        expect(coords[8]).to eq([2, 1])
       end
 
       it 'has the correct value for max' do
@@ -24,21 +24,21 @@ describe TicTacToe do
     end
 
     context 'when board size is specified' do
-      subject(:game_5) { described_class.new(5) }
+      subject(:game5) { described_class.new(5) }
 
       it 'makes a board of the right size' do
         blank = described_class::BLANK_VALUE
-        board = game_5.instance_variable_get(:@board)
+        board = game5.instance_variable_get(:@board)
         expect(board).to eq([[blank, blank, blank, blank, blank], [blank, blank, blank, blank, blank], [blank, blank, blank, blank, blank], [blank, blank, blank, blank, blank], [blank, blank, blank, blank, blank]])
       end
 
-      it 'generates the correct coordinates map' do
-        coords = game_5.instance_variable_get(:@coords)
-        expect(coords.keys.length).to eq(25)
+      it 'generates the correct coordinates for second to last cell' do
+        coords = game5.instance_variable_get(:@coords)
+        expect(coords[24]).to eq([4, 3])
       end
 
       it 'has the correct value for max' do
-        expect(game_5.max).to eq(25)
+        expect(game5.max).to eq(25)
       end
     end
   end
