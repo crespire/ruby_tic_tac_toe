@@ -47,88 +47,174 @@ describe TicTacToe do
     # Primarily puts the board, no need to test
   end
 
-  describe '#full?' do
-    context 'for the default board' do
-      xit 'returns true when the board is full' do
+  describe '#add_move' do
+    subject(:add_game) { described_class.new }
+    let(:board_add) { add_game.instance_variable_get(:@board) }
+
+    context 'for the standard board' do
+      it 'adds a move to the board' do
+        add_game.add_move(5, 1)
+        expect(board_add.dig(1, 1)).to eq(1)
       end
 
-      xit 'returns false when the board has a spot open' do
+      it 'adds a blank value if no input is specified' do
+        add_game.add_move(5, 1)
+        add_game.add_move(5)
+        expect(board_add.dig(1, 1)).to eq(Float::INFINITY)
+      end
+    end
+  end
+
+  describe '#full?' do
+    context 'for the default board' do
+      subject(:full_game) { described_class.new }
+      let(:board_full) { full_game.instance_variable_get(:@board) }
+
+      it 'returns true when the board is full' do
+        board_full.each { |row| row.fill(1) }
+        expect(full_game).to be_full
+      end
+
+      it 'returns false when the board has a spot open' do
+        board_full.each { |row| row.fill(1) }
+        full_game.add_move(5)
+        expect(full_game).to_not be_full
       end
     end
 
     context 'for a custom board' do
-      xit 'returns true when the board is full' do
+      subject(:full_game_5) { described_class.new(5) }
+      let(:board_full_5) { full_game_5.instance_variable_get(:@board) }
+
+      it 'returns true when the board is full' do
+        board_full_5.each { |row| row.fill(1) }
+        expect(full_game_5).to be_full
       end
 
-      xit 'returns false when the board has a free spot' do
+      it 'returns false when the board has a free spot' do
+        board_full_5.each { |row| row.fill(1) }
+        full_game_5.add_move(24)
+        expect(full_game_5).to_not be_full
       end
     end
   end
 
   describe '#loc_valid?' do
     context 'for the default board' do
-      xit 'returns true when provided a location in bounds' do
-        
+      subject(:loc_std) { described_class.new }
+
+      it 'returns true when provided a location in bounds' do
+        expect(loc_std.loc_valid?(5)).to be true
       end
 
-      xit 'returns false when provided an out of bounds location' do
-        
+      it 'returns false when provided an out of bounds location' do
+        expect(loc_std.loc_valid?(10)).to be false
       end
     end
 
     context 'for a larger, custom board' do
-      xit 'returns true when provided an inbound location' do
-        
+      subject(:loc_lrg) { described_class.new(7) }
+      it 'returns true when provided an inbound location' do
+        expect(loc_lrg.loc_valid?(40)).to be true
       end
 
-      xit 'returns false when provided an out of bounds location' do
-        
+      it 'returns false when provided an out of bounds location' do
+        expect(loc_lrg.loc_valid?(-5)).to be false
       end
     end
   end
 
   describe '#loc_empty?' do
     context 'for the standard board' do
-      xit 'returns true if the location is empty' do
+      subject(:empty_std) { described_class.new }
+
+      it 'returns true if the location is empty' do
+        expect(empty_std.loc_empty?(5)).to be_truthy
       end
 
-      xit 'returns false if the location is full' do
+      it 'returns false if the location is full' do
+        empty_std.add_move(5, 1)
+        expect(empty_std.loc_empty?(5)).to be_falsey
       end
 
-      xit 'returns nil if the location is out of bounds' do
-      end
-    end
-  end
-
-  describe '#add_move' do
-    context 'for the standard board' do
-      xit 'adds a move to the board' do
-      end
-
-      xit 'adds a blank value if no input is specified' do
+      it 'returns nil if the location is out of bounds' do
+        expect(empty_std.loc_empty?(10)).to be nil
       end
     end
   end
 
   describe '#winner?' do
     context 'for the standard board' do
-      xit 'returns true for a row win'do
-        
+      subject(:win_game) { described_class.new }
+
+      it 'returns true for a row win' do
+        win_game.add_move(1, 1)
+        win_game.add_move(2, 1)
+        win_game.add_move(3, 1)
+        expect(win_game).to be_winner
       end
 
-      xit 'returns true for a column win' do
-        
+      it 'returns true for a column win' do
+        win_game.add_move(3, 1)
+        win_game.add_move(6, 1)
+        win_game.add_move(9, 1)
+        expect(win_game).to be_winner
       end
 
-      xit 'returns true for a / diagonal win' do
-        
+      it 'returns true for a / diagonal win' do
+        win_game.add_move(3, 1)
+        win_game.add_move(5, 1)
+        win_game.add_move(7, 1)
+        expect(win_game).to be_winner
       end
 
-      xit 'returns true for a \ diagonal win' do
-        
+      it 'returns true for a \ diagonal win' do
+        win_game.add_move(1, 1)
+        win_game.add_move(5, 1)
+        win_game.add_move(9, 1)
+        expect(win_game).to be_winner
       end
     end
 
+    context 'for custom 5 length board' do
+      subject(:win5_game) { described_class.new(5) }
+
+      it 'returns true for a row win' do
+        win5_game.add_move(1, 1)
+        win5_game.add_move(2, 1)
+        win5_game.add_move(3, 1)
+        win5_game.add_move(4, 1)
+        win5_game.add_move(5, 1)
+        expect(win5_game).to be_winner
+      end
+
+      it 'returns true for a column win' do
+        win5_game.add_move(5, 1)
+        win5_game.add_move(10, 1)
+        win5_game.add_move(15, 1)
+        win5_game.add_move(20, 1)
+        win5_game.add_move(25, 1)
+        expect(win5_game).to be_winner
+      end
+
+      it 'returns true for a / diagonal win' do
+        win5_game.add_move(5, 1)
+        win5_game.add_move(9, 1)
+        win5_game.add_move(13, 1)
+        win5_game.add_move(17, 1)
+        win5_game.add_move(21, 1)
+        expect(win5_game).to be_winner
+      end
+
+      it 'returns true for a \ diagonal win' do
+        win5_game.add_move(1, 1)
+        win5_game.add_move(7, 1)
+        win5_game.add_move(13, 1)
+        win5_game.add_move(19, 1)
+        win5_game.add_move(25, 1)
+        expect(win5_game).to be_winner
+      end
+    end
 
   end
 end
